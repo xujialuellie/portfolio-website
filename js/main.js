@@ -24,20 +24,16 @@ document.querySelectorAll('.navbar-button').forEach(button => {
 });
 
 document.addEventListener('scroll', () => {
-  const sections = document.querySelectorAll('.hero');
-  const navbarHeight = document.querySelector('.navbar').offsetHeight;
-  sections.forEach(section => {
-    const rect = section.getBoundingClientRect();
-    const sectionTop = rect.top;
-    const sectionBottom = rect.bottom;
-    const viewportHeight = window.innerHeight;
-    if (sectionTop < navbarHeight + 100 && sectionTop >= 0) {
-      const opacity = 1 - (navbarHeight + 100 - sectionTop) / 100;
-      section.style.opacity = Math.max(0, Math.min(1, opacity));
-    } else if (sectionTop >= viewportHeight) {
-      section.style.opacity = 0;
-    } else if (sectionTop >= navbarHeight && sectionBottom <= viewportHeight) {
-      section.style.opacity = 1;
-    }
-  });
+  const home = document.querySelector('.home');
+  if (!home) return; // Exit if no .home section exists
+  const rect = home.getBoundingClientRect();
+  const sectionTop = rect.top;
+  const viewportHeight = window.innerHeight;
+
+  if (sectionTop <= viewportHeight && sectionTop >= -rect.height) {
+    const opacity = 1 - Math.abs(sectionTop) / (viewportHeight / 2);
+    home.style.opacity = Math.max(0, Math.min(1, opacity));
+  } else {
+    home.style.opacity = 0;
+  }
 });
