@@ -1,6 +1,8 @@
 /* Every webpages */
 * {
   color: #112535;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 body {
@@ -85,7 +87,7 @@ body {
   background-color: #efe5db;
   color: #112535;
   padding-top: 3rem;
-  padding: 12rem 0;
+  padding: 15rem 0;
   text-align: left;
   border-radius: 0.5rem;
   min-height: calc(100vh - 3rem);
@@ -327,15 +329,11 @@ body {
 footer {
   margin-top: auto;
   width: 100%;
-  left: 0;
-  right: 0;
-  bottom: 0;
   background-color: #b1daee;
   color: #112535;
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
   font-size: 1rem;
   padding: 2rem 0;
-  box-sizing: border-box;
 }
 
 .footer-container {
@@ -463,4 +461,67 @@ input::placeholder {
   .footer-column input {
     max-width: 100%;
   }
+}
+
+/* Popup styling */
+.popup {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+
+.popup.show {
+  display: block;
+  opacity: 1;
+  transform: translateX(-50%) translateY(-20px);
+}
+
+.popup-content {
+  background-color: #efe5db;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  position: relative;
+  min-width: 300px;
+}
+
+.popup.success .popup-content {
+  border: 2px solid #3ea4a4;
+}
+
+.popup.error .popup-content {
+  border: 2px solid #dd5035;
+}
+
+.popup.warning .popup-content {
+  border: 2px solid #e9c25e;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 20px;
+  color: #112535;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: #30add1;
+}
+
+h2 {
+  color: #112535;
+  margin: 0 0 10px 0;
+}
+
+p {
+  color: #112535;
+  margin: 0;
 }
