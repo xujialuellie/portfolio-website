@@ -99,18 +99,19 @@
       <div class="footer-container">
         <div class="footer-column">
           <h3>Let's keep in touch</h3>
-          <form action="/submit-email" method="POST" class="email">
-            <input type="email" name="email" placeholder="Your Email Address..." required>
-            <button type="submit" class="submit-button">Submit</button>
-            <!-- Popup box -->
-            <div id="popupBox" class="popup">
-              <div class="popup-content">
-                <span id="closePopup" class="close">&times;</span>
-                <h2 id="popupTitle"></h2>
-                <p id="popupMessage"></p>
-              </div>
-            </div>
-          </form>
+          <div class="email-container">
+            <form id="emailForm" onsubmit="showPopup(event)">
+              <input type="email" id="email-input" name="email" placeholder="Enter your email" required>
+              <button type="submit" class="submit-button">Submit</button>
+            </form>
+          </div>
+          <!-- Popup box -->
+          <div class="overlay" id="overlay"></div>
+          <div id="popup" class="popup">
+            <h2 id="popup-title"></h2>
+            <p id="popup-message"></p>
+            <button type="button" id="popup-close" onclick="closePopup()">OK</button>
+          </div>
         </div>
         <div class="footer-column">
           <h3>Links</h3>

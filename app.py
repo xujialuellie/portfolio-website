@@ -45,7 +45,7 @@ def submit_email():
                 writer.writerow([email, timestamp])
             return jsonify({'status': 'success', 'message': 'Email address successfully submitted!'})
     
-    return jsonify({'status': 'error', 'message': 'Invalid email address.'})
+    return jsonify({'status': 'warning', 'message': 'Invalid email address.'})
 
 if __name__ == '__main__':
     app.run(debug=True)
