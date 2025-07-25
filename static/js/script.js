@@ -25,7 +25,6 @@ document.querySelectorAll('.navbar-button').forEach(button => {
 
 document.addEventListener('scroll', () => {
   const home = document.querySelector('.home');
-  if (!home) return; // Exit if no .home section exists
   const rect = home.getBoundingClientRect();
   const sectionTop = rect.top;
   const viewportHeight = window.innerHeight;
@@ -38,6 +37,7 @@ document.addEventListener('scroll', () => {
   }
 });
 
+// Popup message box
 async function showPopup(event) {
   event.preventDefault();
   const email = document.getElementById('email-input').value;
@@ -72,8 +72,8 @@ async function showPopup(event) {
     popup.style.display = 'block';
     overlay.style.display = 'block';
 
-      // Automatically close popup after 5 seconds
-      // setTimeout(() => {closePopup();}, 5000);
+    // Automatically close popup after 5 seconds
+    setTimeout(() => {closePopup();}, 5000);
       
   } catch (error) {
       console.error('Error fetching popup content:', error);
@@ -84,3 +84,44 @@ function closePopup() {
     document.getElementById('popup').style.display = 'none';
     document.getElementById('overlay').style.display = 'none';
 }
+
+// Gallery navigation
+document.addEventListener('DOMContentLoaded', () => {
+  const galleryWrapper = document.querySelector('.gallery-wrapper');
+  const leftButton = document.getElementById('gallery-left');
+  const rightButton = document.getElementById('gallery-right');
+  const boxes = document.querySelectorAll('.gallery-box');
+  const totalBoxes = boxes.length;
+  const boxesPerPage = 3;
+  let currentIndex = 0;
+
+  // Calculate box width including margins
+  const boxWidth = boxes[0].getBoundingClientRect().width + 2 * 1 * window.innerWidth / 100; // Include 1.5% margin on both sides
+  
+  function updateButtons() {
+    leftButton.style.display = currentIndex === 0 ? 'none' : 'block';
+    rightButton.style.display = currentIndex >= totalBoxes - boxesPerPage ? 'none' : 'block';
+  }
+
+  function slideGallery() {
+    const offset = -currentIndex * boxWidth;
+    galleryWrapper.style.transform = `translateX(${offset}px)`;
+    updateButtons();
+  }
+
+  leftButton.addEventListener('click', () => {
+    if (currentIndex > 0) {
+      currentIndex--;
+      slideGallery();
+    }
+  });
+
+  rightButton.addEventListener('click', () => {
+      if (currentIndex < totalBoxes - boxesPerPage) {
+          currentIndex++;
+          slideGallery();
+      }
+  });
+
+  updateButtons(); // Initialize button visibility
+});

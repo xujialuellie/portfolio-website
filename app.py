@@ -1,4 +1,5 @@
 import os
+import re
 import csv
 from pytz import timezone
 from datetime import datetime
@@ -8,6 +9,9 @@ app = Flask(__name__)
 
 # Path to the CSV file
 CSV_FILE = 'email_address.csv'
+
+# Email validation regex pattern
+EMAIL_REGEX = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
 
 @app.route('/')
 def home():
@@ -19,6 +23,10 @@ def submit_email():
     email = request.form.get('email')
     
     if email:
+        # Validate email format
+        if not re.match(EMAIL_REGEX, email):
+            return jsonify({'status': 'warning', 'message': 'Invalid email format. Please enter a valid email address.'})
+        
         # Check if email already exists in CSV
         email_exists = False
         if os.path.isfile(CSV_FILE):
