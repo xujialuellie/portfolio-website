@@ -96,14 +96,20 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentIndex = 0;
 
   // Calculate box width including margins
-  const boxWidth = boxes[0].getBoundingClientRect().width + 2 * 1 * window.innerWidth / 100; // Include 1.5% margin on both sides
-  
+  function getBoxWidth() {
+    if (boxes.length < 2) return boxes[0].offsetWidth;
+    const firstBoxLeft = boxes[0].getBoundingClientRect().left;
+    const secondBoxLeft = boxes[1].getBoundingClientRect().left;
+    return secondBoxLeft - firstBoxLeft;
+  }
+
   function updateButtons() {
     leftButton.style.display = currentIndex === 0 ? 'none' : 'block';
     rightButton.style.display = currentIndex >= totalBoxes - boxesPerPage ? 'none' : 'block';
   }
 
   function slideGallery() {
+    const boxWidth = getBoxWidth();
     const offset = -currentIndex * boxWidth;
     galleryWrapper.style.transform = `translateX(${offset}px)`;
     updateButtons();
@@ -123,5 +129,20 @@ document.addEventListener('DOMContentLoaded', () => {
       }
   });
 
-  updateButtons(); // Initialize button visibility
+  // Add extra right margin to galleryWrapper for edge effect
+  function updateWrapperMargin() {
+    const container = galleryWrapper.parentElement;
+    const containerWidth = container.offsetWidth;
+    const slideDistance = getSlideDistance();
+    // Add enough right margin so the last box can align at the right edge
+    galleryWrapper.style.marginRight = `${containerWidth - slideDistance * boxesPerPage}px`;
+  }
+
+  window.addEventListener('resize', () => {
+    updateWrapperMargin();
+    slideGallery();
+  });
+
+  updateWrapperMargin();
+  slideGallery(); // Initialize
 });

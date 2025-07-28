@@ -18,8 +18,10 @@ body {
   right: 0;
   background-color:#b1daee;
   color:#112535;
-  padding: 0.5rem;
+  padding: 0.5rem 0;
   z-index: 1000;
+  width: 100%;
+  min-height: 3rem;
 }
 
 .container {
@@ -29,34 +31,114 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 0.5rem;
+  padding: 0 2rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .navbar-title {
   font-size: 1.5rem;
   font-weight: bold;
   text-align: center;
-  margin: 1rem 1rem;
-  padding: 1rem;
+  margin: 0.5rem 1rem;
+  padding: 0.5rem 1rem;
   color: #dd5035;
+  flex-shrink: 0;
 }
 
 .navbar-links {
   display: flex;
   gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 .navbar-button {
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
   color: #112535;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+  white-space: nowrap;
 }
 
 .navbar-button:hover {
   background-color: #e9c25e;
   color: #112535;
   transform: scale(1.05);
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
+  .container {
+    padding: 0 1rem;
+  }
+  .navbar-links {
+    gap: 1rem;
+  }
+}
+
+/* Home Page */
+.home {
+  background-color: #efe5db;
+  color: #112535;
+  padding-top: 3rem;
+  padding: 0;
+  text-align: left;
+  border-radius: 0.5rem;
+  min-height: calc(100vh - 3rem);
+  box-sizing: border-box;
+  scroll-margin-top: 3rem;
+  transition: opacity 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.home-text {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  max-width: 120rem;
+  margin: 0 auto;
+  font-weight: bold;
+}
+
+.home-title {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  flex: 1;
+  color: #3ea4a4;
+  text-align: center;
+}
+
+.home-page {
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  text-align: center;
+  font-size: 2.5rem;
+  padding: 3rem;
+  color: #dd5035;
+  width: 100%;
+  max-width: 120rem;
+  margin: 0 auto;
+}
+
+.home-subtitle {
+  font-size: 1.5rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  flex: 1;
+  color: #112535;
+  text-align: center;
+  width: 100%;
+  max-width: 120rem;
+  margin: 0 auto;
 }
 
 .introduction {
@@ -68,67 +150,8 @@ body {
   color: #112535;
 }
 
-/* Responsive design for mobile */
-@media (max-width: 768px) {
-  .navbar-links {
-    gap: 0.25rem;
-  }
-  .navbar-button {
-    font-size: 1rem;
-    padding: 0.25rem 0.5rem;
-  }
-  .navbar-title {
-    font-size: 1.5rem;
-  }
-}
-
-/* Home Page */
-.home {
-  background-color: #efe5db;
-  color: #112535;
-  padding-top: 3rem;
-  padding: 15rem 0;
-  text-align: left;
-  border-radius: 0.5rem;
-  min-height: calc(100vh - 3rem);
-  box-sizing: border-box;
-  scroll-margin-top: 3rem;
-  transition: opacity 0.3s ease;
-}
-
-.home-text {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  width: 100%;
-  font-weight: bold;
-}
-
-.home-title {
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
-  margin-right: 1rem;
-  flex: 1;
-  color: #3ea4a4;
-}
-
-.home-page {
-  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
-  text-align: center;
-  font-size: 2.5rem;
-  padding: 3rem;
-  color: #dd5035;
-}
-
-.home-subtitle {
-  font-size: 1.5rem;
-  margin-left: 1rem;
-  flex: 1;
-  color: #112535;
-}
-
 .home-name {
-  font-size: 5rem;
+  font-size: 3.5rem;
   color: #30add1;
 }
 
@@ -150,6 +173,40 @@ body {
   }
 }
 
+/* Responsive design for home page */
+@media (max-width: 1200px) {
+  .home-text,
+  .home-page,
+  .home-subtitle {
+    max-width: 90vw;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .home {
+    padding-top: 3rem;
+    min-height: unset;
+  }
+  .home-text {
+    flex-direction: column;
+    align-items: center;
+    max-width: 100vw;
+    padding: 0 0.5rem;
+  }
+  .home-title,
+  .home-subtitle,
+  .home-page {
+    font-size: 1.2rem;
+    max-width: 100vw;
+    padding: 0 0.5rem;
+  }
+  .home-name {
+    font-size: 2.5rem;
+  }
+}
+
 /* About Me Page */
 .section {
   width: 100%;
@@ -160,25 +217,29 @@ body {
 }
 
 .about-me-container {
-  max-width: 120rem;
+  max-width: 1000px;
   margin-left: auto;
   margin-right: auto;
   padding-top: 5rem;
   padding-bottom: 5rem;
+  width: 100%;
 }
 
 .about-me-content {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-left: 5rem;
-  padding-right: 5rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  width: 100%;
+  gap: 2rem;
 }
 
 @media (min-width: 768px) {
   .about-me-content {
     flex-direction: row;
     align-items: flex-start;
+    justify-content: center;
     gap: 2rem;
   }
 }
@@ -188,11 +249,15 @@ body {
   font-size: 1.25rem;
   width: 100%;
   color: #112535;
+  align-items: center;
+  text-align: justify;
 }
 
 @media (min-width: 768px) {
   .about-me-text {
     width: 50%;
+    align-items: flex-start;
+    text-align: left;
   }
 }
 
@@ -217,7 +282,8 @@ body {
 .button-group {
   display: flex;
   gap: 1.5rem;
-  margin-top: 1.5rem;
+  margin-top: 2rem;
+  width: 100%;
 }
 
 .github-button, .linkedin-button {
@@ -227,6 +293,9 @@ body {
   padding: 1rem 2rem; 
   border-radius: 0.5rem;
   transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+  border: none;
+  margin: 0;
+  box-shadow: 0 2px 5px rgba(17, 37, 53, 0.2);
 }
 
 .github-button {
@@ -252,12 +321,14 @@ body {
 .about-me-image {
   display: flex;
   justify-content: center;
+  align-items: center;
   width: 100%;
 }
 
 @media (min-width: 768px) {
   .about-me-image {
     width: 50%;
+    justify-content: flex-start;
   }
 }
 
@@ -268,34 +339,33 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  border: 2px dashed #30add1;
+  background: #efe5db;
+  box-sizing: border-box;
+  margin: 0 auto;
+  border-radius: 1rem;
 }
 
 /* Gallery Page */
-#gallery {
+.gallery-container {
   padding: 2rem;
   width: 100%;
-  margin: 0 auto;
-  background-color: #efe5db;
+  margin: 2rem 0;
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
+  overflow: hidden;
 }
 
 .gallery-title {
   font-size: 2rem;
   font-weight: bold; 
-  padding: 0 0 2rem 2rem;
-  margin-bottom: 2rem;
+  padding: 1rem;
+  margin-bottom: 3rem;
   color: #30add1;
-}
-
-.gallery-container {
-  position: relative;
-  max-width: 1152px;
-  padding: 3rem 0rem;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
+  text-align: center;
+  width: 100%;
 }
 
 .gallery-wrapper {
@@ -303,16 +373,21 @@ body {
   flex-direction: row;
   transition: transform 0.5s ease;
   width: 100%;
+  justify-content: left;
+  gap: 2.5rem;
+  position: relative;
+  z-index: 1;
+  margin-right: 2.5rem;
 }
 
 .gallery-box {
   flex: 0 0 30%;
   background-color: #efe5db;
-  border: 1px solid #112535;
+  border: 2px dashed #30add1;
   border-radius: 0.5rem;
   padding: 1rem;
   margin: 0 1%;
-  box-shadow: 0 2px 5px rgba(17, 37, 53, 0.2);
+  box-shadow: 0 4px 16px rgba(39, 73, 100, 0.08);
   text-align: center;
   cursor: pointer;
   min-width: 360px;
@@ -320,18 +395,20 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.gallery-box:hover {
+  box-shadow: 0 8px 32px rgba(48, 173, 209, 0.15);
+  transform: translateY(-4px) scale(1.03);
 }
 
 .gallery-box h3 {
   margin: 0.5rem 0;
   color: #112535;
   font-size: 1.2rem;
-}
-
-.gallery-box p {
-  margin: 0;
-  color: #112535;
-  font-size: 1rem;
+  font-weight: bold;
 }
 
 .gallery-nav {
@@ -339,24 +416,36 @@ body {
   top: 50%;
   transform: translateY(-50%);
   background-color: transparent;
-  color: rgba(17, 37, 53, 0.7);
-  border: none;
-  width: 40px;
-  height: 40px;
-  line-height: 40px;
+  color: #112535;
+  border: transparent;
+  width: 48px;
+  height: 48px;
+  line-height: 48px;
   text-align: center;
   cursor: pointer;
-  font-size: 1rem;
+  font-size: 1.5rem;
   border-radius: 50%;
-  z-index: 10;
+  z-index: 2;
+  box-shadow: 0 2px 8px rgba(17, 37, 53, 0.08);
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .gallery-nav.left {
-  left: 10px;
+  left: 0px;
+  transition: opacity 0.2s;
 }
 
 .gallery-nav.right {
-  right: 10px;
+  right: 0px;
+  transition: opacity 0.2s;
+}
+
+.gallery-nav.visible {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .gallery-nav:hover {
@@ -406,8 +495,8 @@ body {
 }
 
 .project-title:hover {
-  background-color: #b1daee;
   transform: scale(1.05);
+  font-weight: bold;
 }
 
 @media (max-width: 768px) {
